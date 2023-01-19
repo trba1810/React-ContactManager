@@ -1,9 +1,11 @@
 import React from "react";
 
-const Contact = () => {
+const Contact = (props) => {
   return (
     <div>
-      <button className="btn btn-danger form-control">Kontakt</button>
+      <button className="btn btn-danger form-control">
+        {props.contact.name}
+      </button>
     </div>
   );
 };

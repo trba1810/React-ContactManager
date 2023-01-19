@@ -8,6 +8,35 @@ import RemoveAllContact from "./RemoveAllContact";
 import FavoriteContact from "./FavoriteContact";
 
 export default class ContactIndex extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      constactList: [
+        {
+          id: 1,
+          name: "Pera Peric",
+          phone: "555333",
+          email: "peraperic@gmail.com",
+          isFavorite: false,
+        },
+        {
+          id: 2,
+          name: "Jova Jovic",
+          phone: "222333",
+          email: "jovajovic@gmail.com",
+          isFavorite: true,
+        },
+        {
+          id: 3,
+          name: "Mika Mikic",
+          phone: "111333",
+          email: "mikamikic@gmail.com",
+          isFavorite: true,
+        },
+      ],
+    };
+  }
+
   render() {
     return (
       <div>
@@ -24,10 +53,18 @@ export default class ContactIndex extends Component {
               <AddContact />
             </div>
             <div className="row py-2">
-              <FavoriteContact />
+              <FavoriteContact
+                contacts={this.state.constactList.filter(
+                  (u) => u.isFavorite === true
+                )}
+              />
             </div>
             <div className="row py-2">
-              <GeneralContact />
+              <GeneralContact
+                contacts={this.state.constactList.filter(
+                  (u) => u.isFavorite === false
+                )}
+              />
             </div>
           </div>
         </div>

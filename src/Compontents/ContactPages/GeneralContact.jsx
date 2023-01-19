@@ -1,9 +1,12 @@
 import React from "react";
+import Contact from "./Contact";
 
-export const GeneralContact = () => {
+export const GeneralContact = (props) => {
   return (
     <div>
-      <button className="btn btn-secondary form-control">Svi kontakti</button>
+      {props.contacts.map((contact, index) => (
+        <Contact contact={contact} key={index} />
+      ))}
     </div>
   );
 };
