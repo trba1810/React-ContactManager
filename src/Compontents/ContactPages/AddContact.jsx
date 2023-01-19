@@ -2,8 +2,29 @@ import React from "react";
 
 const AddContact = () => {
   return (
-    <div>
-      <button className="btn btn-secondary form-control">Dodaj kontakt</button>
+    <div className="border row text-white p-2">
+      <div className="col-12 text-white-50">Dodaj novi kontakt</div>
+      <div className="col-12 col-md-4 p-1">
+        <input
+          className="form-control form-control-sm"
+          placeholder="Name..."
+        ></input>
+      </div>
+      <div className="col-12 col-md-4 p-1">
+        <input
+          className="form-control form-control-sm"
+          placeholder="Email..."
+        ></input>
+      </div>
+      <div className="col-12 col-md-4 p-1">
+        <input
+          className="form-control form-control-sm"
+          placeholder="Phone..."
+        ></input>
+      </div>
+      <div className="col-12 col-md-6 offset-md-3 p-1">
+        <button className="btn btn-primary btn-sm form-control">Kreiraj</button>
+      </div>
     </div>
   );
 };
