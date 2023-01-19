@@ -37,6 +37,20 @@ export default class ContactIndex extends Component {
     };
   }
 
+  handleAddContact = (newContact) => {
+    const newFinalContact = {
+      ...newContact,
+      id: this.state.constactList[this.state.constactList.length - 1].id + 1,
+      isFavorite: false,
+    };
+    this.setState((prevState) => {
+      return {
+        constactList: prevState.constactList.concat([newFinalContact]),
+      };
+    });
+    alert("hello");
+  };
+
   render() {
     return (
       <div>
@@ -50,21 +64,27 @@ export default class ContactIndex extends Component {
               <RemoveAllContact />
             </div>
             <div className="row py-2">
-              <AddContact />
+              <div className="col-8 offset-2 row">
+                <AddContact handleAddContact={this.handleAddContact} />
+              </div>
             </div>
             <div className="row py-2">
-              <FavoriteContact
-                contacts={this.state.constactList.filter(
-                  (u) => u.isFavorite === true
-                )}
-              />
+              <div className="col-8 offset-2 row">
+                <FavoriteContact
+                  contacts={this.state.constactList.filter(
+                    (u) => u.isFavorite === true
+                  )}
+                />
+              </div>
             </div>
             <div className="row py-2">
-              <GeneralContact
-                contacts={this.state.constactList.filter(
-                  (u) => u.isFavorite === false
-                )}
-              />
+              <div className="col-8 offset-2 row">
+                <GeneralContact
+                  contacts={this.state.constactList.filter(
+                    (u) => u.isFavorite === false
+                  )}
+                />
+              </div>
             </div>
           </div>
         </div>
