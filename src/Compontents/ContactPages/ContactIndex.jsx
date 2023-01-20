@@ -69,6 +69,19 @@ export default class ContactIndex extends Component {
     }
   };
 
+  handleToggleFavorite = (contact) => {
+    this.setState((prevState) => {
+      return {
+        contactList: prevState.contactList.map((obj) => {
+          if (obj.id === contact.id) {
+            return { ...obj, isFavorite: !obj.isFavorite };
+          }
+          return obj;
+        }),
+      };
+    });
+  };
+
   render() {
     return (
       <div>
@@ -92,6 +105,7 @@ export default class ContactIndex extends Component {
                   contacts={this.state.contactList.filter(
                     (u) => u.isFavorite === true
                   )}
+                  favoriteClick={this.handleToggleFavorite}
                 />
               </div>
             </div>
@@ -101,6 +115,7 @@ export default class ContactIndex extends Component {
                   contacts={this.state.contactList.filter(
                     (u) => u.isFavorite === false
                   )}
+                  favoriteClick={this.handleToggleFavorite}
                 />
               </div>
             </div>
