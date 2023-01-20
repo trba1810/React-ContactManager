@@ -105,6 +105,12 @@ export default class ContactIndex extends Component {
     });
   };
 
+  handleRemoveAllContact = () => {
+    this.setState({
+      contactList: [],
+    });
+  };
+
   render() {
     return (
       <div>
@@ -117,7 +123,9 @@ export default class ContactIndex extends Component {
               />
             </div>
             <div className="col-4 row">
-              <RemoveAllContact />
+              <RemoveAllContact
+                handleRemoveAllContact={this.handleRemoveAllContact}
+              />
             </div>
             <div className="row py-2">
               <div className="col-8 offset-2 row">
