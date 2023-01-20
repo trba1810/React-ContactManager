@@ -82,6 +82,16 @@ export default class ContactIndex extends Component {
     });
   };
 
+  handleDeleteContact = (contactId) => {
+    this.setState((prevState) => {
+      return {
+        contactList: prevState.contactList.filter((obj) => {
+          return obj.id !== contactId;
+        }),
+      };
+    });
+  };
+
   render() {
     return (
       <div>
@@ -106,6 +116,7 @@ export default class ContactIndex extends Component {
                     (u) => u.isFavorite === true
                   )}
                   favoriteClick={this.handleToggleFavorite}
+                  deleteContact={this.handleDeleteContact}
                 />
               </div>
             </div>
@@ -116,6 +127,7 @@ export default class ContactIndex extends Component {
                     (u) => u.isFavorite === false
                   )}
                   favoriteClick={this.handleToggleFavorite}
+                  deleteContact={this.handleDeleteContact}
                 />
               </div>
             </div>
