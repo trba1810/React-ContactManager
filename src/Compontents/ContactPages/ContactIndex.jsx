@@ -11,7 +11,7 @@ export default class ContactIndex extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      constactList: [
+      contactList: [
         {
           id: 1,
           name: "Pera Peric",
@@ -38,17 +38,35 @@ export default class ContactIndex extends Component {
   }
 
   handleAddContact = (newContact) => {
-    const newFinalContact = {
-      ...newContact,
-      id: this.state.constactList[this.state.constactList.length - 1].id + 1,
-      isFavorite: false,
-    };
-    this.setState((prevState) => {
-      return {
-        constactList: prevState.constactList.concat([newFinalContact]),
-      };
+    if (newContact.name === "") {
+      return { status: "Greska", msg: "Dodaj ispravno ime" };
+    } else if (newContact.phone === "") {
+      return { status: "Greska", msg: "Dodaj ispravan telefon" };
+    } else if (newContact.email === "") {
+      return { status: "Greska", msg: "Dodaj ispravan email" };
+    }
+
+    const duplicateContact = this.state.contactList.filter((x) => {
+      if (x.name === newContact.name && x.phone === newContact.phone) {
+        return true;
+      }
+      return false;
     });
-    alert("hello");
+    if (duplicateContact.length > 0) {
+      return { status: "Greska", msg: "Duplikat" };
+    } else {
+      const newFinalContact = {
+        ...newContact,
+        id: this.state.contactList[this.state.contactList.length - 1].id + 1,
+        isFavorite: false,
+      };
+      this.setState((prevState) => {
+        return {
+          contactList: prevState.contactList.concat([newFinalContact]),
+        };
+      });
+      return { status: "Uspeh", msg: "Uspesno dodat kontakt" };
+    }
   };
 
   render() {
@@ -71,7 +89,7 @@ export default class ContactIndex extends Component {
             <div className="row py-2">
               <div className="col-8 offset-2 row">
                 <FavoriteContact
-                  contacts={this.state.constactList.filter(
+                  contacts={this.state.contactList.filter(
                     (u) => u.isFavorite === true
                   )}
                 />
@@ -80,7 +98,7 @@ export default class ContactIndex extends Component {
             <div className="row py-2">
               <div className="col-8 offset-2 row">
                 <GeneralContact
-                  contacts={this.state.constactList.filter(
+                  contacts={this.state.contactList.filter(
                     (u) => u.isFavorite === false
                   )}
                 />
