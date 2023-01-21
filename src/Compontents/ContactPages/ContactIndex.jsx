@@ -34,6 +34,8 @@ export default class ContactIndex extends Component {
           isFavorite: true,
         },
       ],
+      selectedContact: undefined,
+      isUpdating: false,
     };
   }
 
@@ -111,6 +113,14 @@ export default class ContactIndex extends Component {
     });
   };
 
+  handleUpdateContact = (contact) => {
+    console.log(contact);
+    this.setState({
+      selectedContact: contact,
+      isUpdating: true,
+    });
+  };
+
   render() {
     return (
       <div>
@@ -129,7 +139,11 @@ export default class ContactIndex extends Component {
             </div>
             <div className="row py-2">
               <div className="col-8 offset-2 row">
-                <AddContact handleAddContact={this.handleAddContact} />
+                <AddContact
+                  handleAddContact={this.handleAddContact}
+                  isUpdating={this.state.isUpdating}
+                  selectedContact={this.state.selectedContact}
+                />
               </div>
             </div>
             <div className="row py-2">
@@ -140,6 +154,7 @@ export default class ContactIndex extends Component {
                   )}
                   favoriteClick={this.handleToggleFavorite}
                   deleteContact={this.handleDeleteContact}
+                  updateContact={this.handleUpdateContact}
                 />
               </div>
             </div>
@@ -151,6 +166,7 @@ export default class ContactIndex extends Component {
                   )}
                   favoriteClick={this.handleToggleFavorite}
                   deleteContact={this.handleDeleteContact}
+                  updateContact={this.handleUpdateContact}
                 />
               </div>
             </div>
