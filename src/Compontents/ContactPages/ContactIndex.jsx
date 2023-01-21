@@ -114,10 +114,16 @@ export default class ContactIndex extends Component {
   };
 
   handleUpdateContact = (contact) => {
-    console.log(contact);
     this.setState({
       selectedContact: contact,
       isUpdating: true,
+    });
+  };
+
+  handleCancelUpdateContact = (contact) => {
+    this.setState({
+      selectedContact: undefined,
+      isUpdating: false,
     });
   };
 
@@ -143,6 +149,7 @@ export default class ContactIndex extends Component {
                   handleAddContact={this.handleAddContact}
                   isUpdating={this.state.isUpdating}
                   selectedContact={this.state.selectedContact}
+                  cancelUpdateContact={this.handleCancelUpdateContact}
                 />
               </div>
             </div>

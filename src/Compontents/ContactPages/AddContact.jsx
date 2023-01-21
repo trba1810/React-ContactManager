@@ -9,6 +9,10 @@ class AddContact extends React.Component {
     };
   }
 
+  handleCancel = () => {
+    this.props.cancelUpdateContact();
+  };
+
   handleAddContactFormSubmit = (e) => {
     e.preventDefault();
     const name = e.target.elements.contactName.value.trim();
@@ -96,7 +100,10 @@ class AddContact extends React.Component {
             </div>
             <div className="col-12 col-md-4 p-1">
               {this.props.isUpdating && (
-                <button className="btn btn-secondary btn-sm form-control">
+                <button
+                  className="btn btn-secondary btn-sm form-control"
+                  onClick={this.handleCancel}
+                >
                   Otkazi
                 </button>
               )}
