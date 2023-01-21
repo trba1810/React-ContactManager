@@ -71,6 +71,35 @@ export default class ContactIndex extends Component {
     }
   };
 
+  handleUpdateContact = (updatedContact) => {
+    if (updatedContact.name === "") {
+      return { status: "Greska", msg: "Dodaj ispravno ime" };
+    } else if (updatedContact.phone === "") {
+      return { status: "Greska", msg: "Dodaj ispravan telefon" };
+    } else if (updatedContact.email === "") {
+      return { status: "Greska", msg: "Dodaj ispravan email" };
+    }
+
+    this.setState((prevState) => {
+      return {
+        contactList: prevState.contactList.map((obj) => {
+          if (obj.id === updatedContact.id) {
+            return {
+              ...obj,
+              name: updatedContact.name,
+              email: updatedContact.email,
+              phone: updatedContact.phone,
+            };
+          }
+          return obj;
+        }),
+        isUpdating: false,
+        selectedContact: undefined,
+      };
+    });
+    return { status: "Uspeh", msg: "Uspesno izmenjen kontakt" };
+  };
+
   handleToggleFavorite = (contact) => {
     this.setState((prevState) => {
       return {
@@ -113,7 +142,7 @@ export default class ContactIndex extends Component {
     });
   };
 
-  handleUpdateContact = (contact) => {
+  handleClickContact = (contact) => {
     this.setState({
       selectedContact: contact,
       isUpdating: true,
@@ -150,6 +179,7 @@ export default class ContactIndex extends Component {
                   isUpdating={this.state.isUpdating}
                   selectedContact={this.state.selectedContact}
                   cancelUpdateContact={this.handleCancelUpdateContact}
+                  handleUpdateContact={this.handleUpdateContact}
                 />
               </div>
             </div>
@@ -161,7 +191,7 @@ export default class ContactIndex extends Component {
                   )}
                   favoriteClick={this.handleToggleFavorite}
                   deleteContact={this.handleDeleteContact}
-                  updateContact={this.handleUpdateContact}
+                  updateContact={this.handleClickContact}
                 />
               </div>
             </div>
@@ -173,7 +203,7 @@ export default class ContactIndex extends Component {
                   )}
                   favoriteClick={this.handleToggleFavorite}
                   deleteContact={this.handleDeleteContact}
-                  updateContact={this.handleUpdateContact}
+                  updateContact={this.handleClickContact}
                 />
               </div>
             </div>
